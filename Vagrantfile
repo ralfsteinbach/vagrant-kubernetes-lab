@@ -23,7 +23,7 @@ cmd_opts = GetoptLong.new(
 
 options = {
   #:kubernetes => "1.9.1",
-  :kubernetes => "latest",
+  :kubernetes => "1.10.1",
   :pod_network_cidr => "10.244.0.0/16",
   :kubeadm_token => "54c315.78a320e33baaf27d",
   :host_mount => nil,  
@@ -57,8 +57,14 @@ boxes = [
         :is_master => true
     },
     {
-        :name => "k8sworker",
+        :name => "k8sworker1",
         :eth1 => "192.168.8.11",
+        :mem => "4096",
+        :cpu => "2"
+    },
+    {
+        :name => "k8sworker2",
+        :eth1 => "192.168.8.12",
         :mem => "4096",
         :cpu => "2"
     }
@@ -77,7 +83,7 @@ Vagrant.configure("2") do |config|
   boxes.each do |opts|
     config.vm.define opts[:name] do |config|
       config.vm.hostname = opts[:name]
-
+      config.disksize.size = '20GB'
       config.vm.provider "virtualbox" do |v|
         v.customize ["modifyvm", :id, "--memory", opts[:mem]]
         v.customize ["modifyvm", :id, "--cpus", opts[:cpu]]
