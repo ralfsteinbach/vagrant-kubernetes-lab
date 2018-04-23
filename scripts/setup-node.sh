@@ -24,20 +24,36 @@ fi
 # Inject our IP into the /etc/hosts in order to fix issues with VirtualBox networking
 sed "s/127\.0\.0\.1.*k8s.*/$BOX_ETH1   $BOX_NAME/" -i /etc/hosts
 
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
 # Install required software to run a kubernetes cluster
-apt-get update && apt-get install -y apt-transport-https
+apt-get update && apt-get install -y apt-transport-https software-properties-common python-software-properties
+
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
 deb http://apt.kubernetes.io/ kubernetes-xenial main
 EOF
+
+sudo add-apt-repository \
+    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) \
+    stable"
+
 apt-get update
 apt-get upgrade -y
-apt-get install -y docker.io
-apt-get install -y kubelet$KUBE_APT_VERSION
-apt-get install -y kubeadm$KUBE_APT_VERSION
-apt-get install -y kubectl$KUBE_APT_VERSION 
-apt-get install -y kubernetes-cni
-apt-get install -y nfs-common
+apt-get install -y docker-ce \
+                   kubelet$KUBE_APT_VERSION \
+                   kubeadm$KUBE_APT_VERSION \
+                   kubectl$KUBE_APT_VERSION  \
+                   kubernetes-cni \
+                   nfs-common \
+                   curl \
+                   htop \
+                   vim
+
+# Allow docker usage for vagrant user
+sudo usermod -aG docker vagrant
 
 # install helm client
 curl --silent https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
