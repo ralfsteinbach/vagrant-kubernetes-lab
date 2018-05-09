@@ -11,6 +11,6 @@ echo "Copy the previous token in the clipboard and you will have to paste it in 
 echo ""
 read -p "Press enter to open the dashboard in your browser:" VAR
 
-open http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+xdg-open http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
 
 kubectl proxy
