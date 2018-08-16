@@ -22,7 +22,7 @@ cmd_opts = GetoptLong.new(
 )
 
 options = {
-  :kubernetes => "1.10.6",
+  :kubernetes => "1.11.1",
   :pod_network_cidr => "10.244.0.0/16",
   :kubeadm_token => "54c315.78a320e33baaf27d",
   :host_mount => nil,  
@@ -50,35 +50,36 @@ end
 boxes = [
     {
         :name => "k8smaster",
-        :eth1 => "192.168.8.10",
+        :eth1 => "192.168.33.20",
         :mem => "2048",
         :cpu => "1",
         :is_master => true
     },
     {
         :name => "k8sworker1",
-        :eth1 => "192.168.8.11",
-        :mem => "3072",
-        :cpu => "2"
+        :eth1 => "192.168.33.21",
+        :mem => "2048",
+        :cpu => "1"
     },
     {
         :name => "k8sworker2",
-        :eth1 => "192.168.8.12",
-        :mem => "3072",
-        :cpu => "2"
+        :eth1 => "192.168.33.22",
+        :mem => "2048",
+        :cpu => "1"
     },
     {
         :name => "k8sworker3",
-        :eth1 => "192.168.8.13",
-        :mem => "3072",
-        :cpu => "2"
-    },
-    {
-        :name => "k8sworker4",
-        :eth1 => "192.168.8.14",
-        :mem => "3072",
-        :cpu => "2"
+        :eth1 => "192.168.33.23",
+        :mem => "2048",
+        :cpu => "1"
     }
+#    ,
+#    {
+#        :name => "k8sworker4",
+#        :eth1 => "192.168.8.14",
+#        :mem => "2048",
+#        :cpu => "1"
+#    }
 ]
 
 Vagrant.configure("2") do |config|
