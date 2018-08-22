@@ -3,6 +3,8 @@ This project is to provide a simple local Kubernetes cluster with a master and a
 
 Vagrant was chosen for being able to create the cluster either on linux, windows and mac hosts.
 
+![Vagrant + Docker + Kubernetes](https://cdn-images-1.medium.com/max/1600/1*qfRHBkxKEwK8nfnwGe6WCQ.png)
+
 ## Prequirements
 - Vagrant : https://www.vagrantup.com/downloads.html
 - VirtualBox : https://www.virtualbox.org/wiki/Downloads
