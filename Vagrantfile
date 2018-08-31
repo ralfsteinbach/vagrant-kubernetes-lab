@@ -22,7 +22,7 @@ cmd_opts = GetoptLong.new(
 )
 
 options = {
-  :kubernetes => "1.11.1",
+  :kubernetes => "1.11.2",
   :pod_network_cidr => "10.244.0.0/16",
   :kubeadm_token => "54c315.78a320e33baaf27d",
   :host_mount => nil,  
