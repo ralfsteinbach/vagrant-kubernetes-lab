@@ -10,6 +10,6 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: demo-service
+          serviceName: demo-service-hazelcast
           servicePort: 8080
         path: /
