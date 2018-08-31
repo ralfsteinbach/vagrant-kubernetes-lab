@@ -23,4 +23,10 @@ set +x
 echo "----------------------------<<< ADD MONITORING >>>-------------------------------"
 set -x
 kubectl apply -f monitoring/kube-influxdb-grafana.yml
-kubectl apply  -f "https://cloud.weave.works/k8s/scope.yaml?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+kubectl apply -f "https://cloud.weave.works/k8s/scope.yaml?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+
+
+# Ease demos by disabling authentication for dashboard
+# See: https://stackoverflow.com/questions/46664104/how-to-sign-in-kubernetes-dashboard
+# Open up dashboard access
+kubectl apply -f dashboard/skip-auth.yaml
