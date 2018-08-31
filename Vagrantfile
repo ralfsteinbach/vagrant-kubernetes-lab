@@ -133,6 +133,9 @@ Vagrant.configure("2") do |config|
           # Copy Kube config into our shared Vagrant folder
           cp -rf  /etc/kubernetes/admin.conf /vagrant/kubeconfig/      
         SHELL
+
+        node.vm.provision "shell", path: "./scripts/setup-docker-registry.sh"
+
       else # it is a worker
         master = boxes.select { |box| box[:is_master] }.first
         raise "Could not find master box" if master == nil
@@ -142,6 +145,8 @@ Vagrant.configure("2") do |config|
           # Add a worker node to the cluster
           kubeadm join --ignore-preflight-errors=all --discovery-token-unsafe-skip-ca-verification --token #{options[:kubeadm_token]} #{master[:eth1]}:6443 
         SHELL
+
+        node.vm.provision "shell", path: "./scripts/setup-docker-registry-access.sh", args: [master[:name], master[:eth1]]
       end
 
       # if the user provided its credentials for his DockerHub account, then do the login for each node.
