@@ -12,6 +12,8 @@ DOCKER_USERNAME_OPT='--docker-username'
 DOCKER_PASSWORD_OPT='--docker-password'
 
 cmd_opts = GetoptLong.new(
+    [ '--force', GetoptLong::OPTIONAL_ARGUMENT ],
+    [ '--provision', GetoptLong::OPTIONAL_ARGUMENT ],
     # The path on the host that will be mounted on the nodes under /data
     [ MOUNT_OPT, GetoptLong::OPTIONAL_ARGUMENT ],
     # The network driver to user (weave or flannel)
