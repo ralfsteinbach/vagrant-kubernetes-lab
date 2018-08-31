@@ -53,27 +53,27 @@ boxes = [
     {
         :name => "k8smaster",
         :eth1 => "192.168.33.20",
-        :mem => "2048",
-        :cpu => "1",
+        :mem => "3072",
+        :cpu => "2",
         :is_master => true
     },
     {
         :name => "k8sworker1",
         :eth1 => "192.168.33.21",
-        :mem => "2048",
-        :cpu => "1"
+        :mem => "3072",
+        :cpu => "2"
     },
     {
         :name => "k8sworker2",
         :eth1 => "192.168.33.22",
-        :mem => "2048",
-        :cpu => "1"
+        :mem => "3072",
+        :cpu => "2"
     },
     {
         :name => "k8sworker3",
         :eth1 => "192.168.33.23",
-        :mem => "2048",
-        :cpu => "1"
+        :mem => "3072",
+        :cpu => "2"
     }
 #    ,
 #    {
@@ -97,7 +97,7 @@ Vagrant.configure("2") do |config|
   boxes.each do |opts|
     config.vm.define opts[:name] do |config|
       config.vm.hostname = opts[:name]
-      config.disksize.size = '20GB'
+      config.disksize.size = '32GB'
       config.vm.provider "virtualbox" do |v|
         v.customize ["modifyvm", :id, "--memory", opts[:mem]]
         v.customize ["modifyvm", :id, "--cpus", opts[:cpu]]
