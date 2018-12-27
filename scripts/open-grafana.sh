@@ -6,4 +6,4 @@ source $SCRIPT_DIR/set-kubeconfig.sh
 
 xdg-open http://127.0.0.1:3000
 
-kubectl port-forward -n kube-system "$(kubectl get -n kube-system pod --selector=k8s-app=grafana -o jsonpath='{.items..metadata.name}')" 3000
+kubectl -n monitoring port-forward service/grafana 3000

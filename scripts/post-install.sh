@@ -19,9 +19,6 @@ else
     kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 fi
 
-# Install heapster
-kubectl apply -f /vagrant/monitoring/kube-heapster.yml
-
 # Install dashboard
 kubectl apply -f /vagrant/dashboard/admin-user.yaml
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml
