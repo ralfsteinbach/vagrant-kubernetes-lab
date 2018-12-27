@@ -24,7 +24,8 @@ kubectl apply -f /vagrant/monitoring/kube-heapster.yml
 
 # Install dashboard
 kubectl apply -f /vagrant/dashboard/admin-user.yaml
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml
+#kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
 
 # install Helm server (tiller)
 kubectl create serviceaccount -n kube-system tiller

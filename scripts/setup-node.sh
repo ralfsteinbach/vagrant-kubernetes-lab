@@ -42,8 +42,11 @@ sudo add-apt-repository \
 
 apt-get update
 apt-get upgrade -y
-apt-get install -y docker-ce \
-                   kubelet$KUBE_APT_VERSION \
+
+# install docker
+apt-get install -y docker-ce=$(apt-cache madison docker-ce | grep 18.06 | head -1 | awk '{print $3}') \
+
+apt-get install -y kubelet$KUBE_APT_VERSION \
                    kubeadm$KUBE_APT_VERSION \
                    kubectl$KUBE_APT_VERSION  \
                    kubernetes-cni \

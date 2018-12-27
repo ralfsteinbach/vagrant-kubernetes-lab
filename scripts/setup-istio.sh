@@ -8,7 +8,7 @@ KUBE_VERSION=$1
 ISTIO_VERSION=$2
 
 echo "Downloading istio version: $ISTIO_VERSION"
-curl -L https://git.io/getLatestIstio | sh -
+curl -L https://git.io/getLatestIstio | ISTIO_VERSION=$ISTIO_VERSION  sh -
 
 echo "Installing istio credential configuration"
 cd istio-$ISTIO_VERSION
