@@ -1,0 +1,34 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: test-pvc
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "example-nfs"
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: test-pvc-pod
+spec:
+
+  volumes:
+    - name: test-pv
+      persistentVolumeClaim:
+       claimName: test-pvc
+
+  containers:
+    - name: test-pvc-pod
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+      - mountPath: "/usr/share/nginx/html"
+        name: test-pv
+

@@ -23,6 +23,8 @@ set +x
 echo "----------------------------<<< ADD MONITORING >>>-------------------------------"
 set -x
 
+kubectl apply -f "https://cloud.weave.works/k8s/scope.yaml?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+
 kubectl create -f monitoring/manifests/ || true
 
 # It can take a few seconds for the above 'create manifests' command to fully create the following resources, so verify the resources are ready before proceeding.
@@ -35,3 +37,5 @@ kubectl create -f monitoring/manifests/ 2>/dev/null || true  # This command some
 # See: https://stackoverflow.com/questions/46664104/how-to-sign-in-kubernetes-dashboard
 # Open up dashboard access
 kubectl apply -f dashboard/skip-auth.yaml
+
+

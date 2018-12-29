@@ -14,7 +14,6 @@ Vagrant up will provide 2 Ubuntu Xenial VMs for a kubernetes cluster with these 
 - Kubernetes control plane (latest)
 - Weave network cni (latest)
 - Kubernetes Dashboard (latest)
-- Heapster v1.5.1
 - Helm (latest)
 
 ## Options
