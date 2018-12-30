@@ -24,6 +24,13 @@ By default, we will use the Weave-Net driver but you can override it with flanne
  vagrant --network=flannel up
 ```
 
+### bridged-network
+By default, we will use the Virtual Box ```private_network``` but you can use a ```briged_network``` by giving the name of the network adapter like this:
+```
+ vagrant --bridged-network=<network adapter name> up
+```
+Depending on this setting, it may be necessary to adapt the ip addresses of the nodes (boxes section of Vagrantfile) to fall into the iprange of your network.
+
 ### mount
 It is possible to mount a directory from the host to the /data directory on each node.  This option could be used, for example, to make git repositories local to the host available to be used in the cluster.
 

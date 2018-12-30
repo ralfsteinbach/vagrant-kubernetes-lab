@@ -10,14 +10,17 @@ MOUNT_OPT='--mount'
 NETWORK_OPT='--network'
 DOCKER_USERNAME_OPT='--docker-username'
 DOCKER_PASSWORD_OPT='--docker-password'
+BRIDGED_NETWORK_OPT='--bridged-network'
 
 cmd_opts = GetoptLong.new(
     [ '--force', GetoptLong::OPTIONAL_ARGUMENT ],
     [ '--provision', GetoptLong::OPTIONAL_ARGUMENT ],
     # The path on the host that will be mounted on the nodes under /data
     [ MOUNT_OPT, GetoptLong::OPTIONAL_ARGUMENT ],
-    # The network driver to user (weave or flannel)
+    # The network driver to use (weave or flannel)
     [ NETWORK_OPT, GetoptLong::OPTIONAL_ARGUMENT ],
+    # The network_bridge to use (networkname)
+    [ BRIDGED_NETWORK_OPT, GetoptLong::OPTIONAL_ARGUMENT ],
     # The dockerhub credentials
     [ DOCKER_USERNAME_OPT, GetoptLong::OPTIONAL_ARGUMENT ],
     [ DOCKER_PASSWORD_OPT, GetoptLong::OPTIONAL_ARGUMENT ]
@@ -32,7 +35,8 @@ options = {
   :guest_mount => "/data",  
   :docker_username => nil,  
   :docker_password => nil,  
-  :network => "weave" # or "flannel"
+  :network => "weave", # or "flannel"
+  :briged_network => nil # or name of network interface e.g. "wlp3s0" for bridged networking
 }
 
 cmd_opts.each do |opt, arg|
@@ -43,6 +47,9 @@ cmd_opts.each do |opt, arg|
       when NETWORK_OPT
         options[:network]=arg
         puts "Use Network driver #{arg}"
+      when BRIDGED_NETWORK_OPT
+        options[:briged_network]=arg
+        puts "Use Bridged Network #{arg}"
       when DOCKER_USERNAME_OPT
       options[:docker_username]=arg
     when DOCKER_PASSWORD_OPT
@@ -104,7 +111,11 @@ Vagrant.configure("2") do |config|
         v.customize ["modifyvm", :id, "--cpus", opts[:cpu]]
       end
 
-      config.vm.network :public_network, ip: opts[:eth1], bridge: "wlp3s0"
+      if options[:briged_network]
+        config.vm.network :public_network, ip: opts[:eth1], bridge: options[:briged_network]
+      else 
+        config.vm.network :private_network, ip: opts[:eth1]
+      end
     end
   end
 

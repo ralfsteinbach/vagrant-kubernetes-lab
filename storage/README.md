@@ -1,16 +1,18 @@
-### nfs-provisioner
+## nfs-provisioner
 This dynamic NFS storage provisioner is using this image:
-- [nfs-provisioner v1.0.8](https://quay.io/repository/kubernetes_incubator/nfs-provisioner?tag=v1.0.8&tab=tags)
-##### Installation
+- [nfs-provisioner v2.2.1-k8s1.12](https://quay.io/repository/kubernetes_incubator/nfs-provisioner?tag=v2.2.1-k8s1.12&tab=tags)
+#### Installation
 Install with kubectl :
 ```
-kubectl create -f storage/kube-nfsprovisioner.yml
+kubectl apply -f storage/nfs-psp.yml
+kubectl apply -f storage/nfs-rbac.yml
+kubectl apply -f storage/nfs-deployment.yml
 ```
 In order to avoid having to supply annotations to the persistent volume claim, make the provisioner the default one :
 ```
 kubectl patch storageclass example-nfs -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 ```
-##### Example
+#### Example
 Create a pvc and a pod - test-pvc.yml :
 ```
 kind: PersistentVolumeClaim
