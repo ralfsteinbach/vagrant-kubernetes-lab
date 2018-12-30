@@ -9,8 +9,6 @@ source $SCRIPT_DIR/set-kubeconfig.sh
 set +x
 echo "----------------------------<<< ADD STORAGE >>>-------------------------------"
 set -x
-#kubectl apply -f storage/kube-nfsprovisioner.yml
-# following 3 lines result from experiments with new version of nfsprovisioner
 kubectl apply -f storage/nfs-psp.yml
 kubectl apply -f storage/nfs-rbac.yml
 kubectl apply -f storage/nfs-deployment.yml
