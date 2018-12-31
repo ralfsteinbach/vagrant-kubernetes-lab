@@ -71,13 +71,13 @@ Here is the current list by category :
 ### Ingress
 - Nginx ingress controller v0.9.0-beta.15 + Default backend v1.4
 ### Monitoring
-- InfluxDB v1.3.3 + Grafana v4.4.3
+- [kube-prometheus](https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus) (Prometheus, Grafana, Alert Manager)
 - Weavescope v1.6.7
 ### Networking
 - Weave net (latest)
 - Flannel v0.9.1
 ### Storage
-- Nfs-provisioner v1.0.9
+- [nfs-provisioner v2.2.1-k8s1.12](https://quay.io/repository/kubernetes_incubator/nfs-provisioner?tag=v2.2.1-k8s1.12&tab=tags)
 ### Helm
 - Helm (latest)
 Installed by default, only helm client is required to fit your host OS : https://github.com/kubernetes/helm/releases
