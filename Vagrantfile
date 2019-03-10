@@ -28,7 +28,7 @@ cmd_opts = GetoptLong.new(
 
 options = {
   :kubernetes => "1.13.0",
-  :istio => "1.0.4",
+  :istio => "1.0.6",
   :pod_network_cidr => "10.244.0.0/16",
   :kubeadm_token => "54c315.78a320e33baaf27d",
   :host_mount => nil,  
@@ -165,7 +165,7 @@ Vagrant.configure("2") do |config|
       if isLastBox
         node.vm.provision "shell", path: "./scripts/post-install.sh",  args: [options[:network]]
         # Setup Istio
-        # node.vm.provision "shell", path: "./scripts/setup-istio.sh", args: [options[:kubernetes], options[:istio]]
+        node.vm.provision "shell", path: "./scripts/setup-istio.sh", args: [options[:kubernetes], options[:istio]]
       end
     end
   end  

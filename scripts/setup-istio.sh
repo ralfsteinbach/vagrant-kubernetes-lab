@@ -19,7 +19,7 @@ cd istio-$ISTIO_VERSION
 sleep 30
 
 echo "Installing istio..."
-helm install install/kubernetes/helm/istio --name istio --namespace istio-system --set tracing.enabled=true
+helm install install/kubernetes/helm/istio --name istio --namespace istio-system --set grafana.enabled=true,servicegraph.enabled=true,tracing.enabled=true
 kubectl label namespace default istio-injection=enabled
 
 echo "Istio installed."
