@@ -28,7 +28,7 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 
 # Install required software to run a kubernetes cluster
-apt-get update && apt-get install -y apt-transport-https software-properties-common python-software-properties
+apt-get update && apt-get install -y apt-transport-https software-properties-common #python-software-properties
 
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
@@ -44,7 +44,7 @@ apt-get update
 apt-get upgrade -y
 
 # install docker
-apt-get install -y docker-ce=$(apt-cache madison docker-ce | grep 18.06 | head -1 | awk '{print $3}') \
+apt-get install -y docker-ce=$(apt-cache madison docker-ce | grep 18.09 | head -1 | awk '{print $3}') \
 
 apt-get install -y kubelet$KUBE_APT_VERSION \
                    kubeadm$KUBE_APT_VERSION \

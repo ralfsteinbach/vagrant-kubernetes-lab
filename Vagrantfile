@@ -27,7 +27,7 @@ cmd_opts = GetoptLong.new(
 )
 
 options = {
-  :kubernetes => "1.13.0",
+  :kubernetes => "1.14.0",
   :istio => "1.0.6",
   :pod_network_cidr => "10.244.0.0/16",
   :kubeadm_token => "54c315.78a320e33baaf27d",
@@ -60,7 +60,8 @@ end
 boxes = [
     {
         :name => "k8smaster",
-        :eth1 => "192.168.100.20",
+#        :eth1 => "192.168.100.20", #bridged
+        :eth1 => "192.168.10.20",
         :mem => "2048",
         :cpu => "2",
         :disksize => "10GB",
@@ -68,14 +69,16 @@ boxes = [
     },
     {
         :name => "k8sworker1",
-        :eth1 => "192.168.100.21",
+#        :eth1 => "192.168.100.21", #bridged
+        :eth1 => "192.168.10.21",
         :mem => "4096",
         :cpu => "2",
         :disksize => "20GB"
     },
     {
         :name => "k8sworker2",
-        :eth1 => "192.168.100.22",
+#        :eth1 => "192.168.100.22", #bridged
+        :eth1 => "192.168.10.22",
         :mem => "4096",
         :cpu => "2",
         :disksize => "20GB"
@@ -84,7 +87,7 @@ boxes = [
 
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "ubuntu/xenial64"
+  config.vm.box = "ubuntu/bionic64"
 
   # Validate the nodes
   masterCount = boxes.select { |box| box[:is_master] }.count 
@@ -165,7 +168,7 @@ Vagrant.configure("2") do |config|
       if isLastBox
         node.vm.provision "shell", path: "./scripts/post-install.sh",  args: [options[:network]]
         # Setup Istio
-        node.vm.provision "shell", path: "./scripts/setup-istio.sh", args: [options[:kubernetes], options[:istio]]
+        #node.vm.provision "shell", path: "./scripts/setup-istio.sh", args: [options[:kubernetes], options[:istio]]
       end
     end
   end  
